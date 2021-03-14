@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Rate Film</title>
+
+<div class="container">
+    <div class="pic" id="pic">
+        <img src="">
+    </div>
+    <div class="title" id="title">
+        <h3 id="film-title">Film Name: </h3>
+    </div>
+        <div class="title" id="title">
+    <div class="form-group">
+        <h3>How was the film?</h3>
+        <p>Terrible <input type="radio" id="rating" name="rating" value="1" checked />
+        <input type="radio" id="rating" name="rating" value="2" />
+        <input type="radio" id="rating" name="rating" value="3" />
+        <input type="radio" id="rating" name="rating" value="4" />
+        <input type="radio" id="rating" name="rating" value="5" /> Excellent</p>
+    </div>
+</div>
+
+{% endblock %}

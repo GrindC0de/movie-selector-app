@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://unpkg.com/jquery"></script>
+
+  <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Selector</title>
+  <link rel="stylesheet" href="../static/style.css" />
+</head>
+<body>
+  {% block content %}
+  <h1>Find A Film</h1>
+  <h3>Please sign in</h3>
+  <div class="form-group">
+    <form class="signin">
+      <div id="user"><input type="text" class="form-control" placeholder="Username"></div>
+      <div id="password"><input type="text" class="form-control" placeholder="Password"></div>
+      <input type="checkbox" class="form-check-input" id="remember-me">
+      <label class="form-check-label">Remember Me</label>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+      <p>Don't have an account? <a href="/signup">Sign up!</a></p>
+
+
+    </form>
+  </div>
+
+  {% endblock %}
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="../static/app.js"></script>
+</body>
+</html>

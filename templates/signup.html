@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>Sign Up</title>
+<div class="form-group">
+  <form method="POST" action="/profile">
+    <h1>Sign Up</h1>
+    <h4>Please fill in all fields to create an account and get started!</h3>
+    <div class="form-group">
+    <div id="select-name"><input type="text" class="form-control" placeholder="Pick A Username"></div>
+    <div id="first-name"><input type="text" class="form-control" placeholder="First Name"></div>
+    <div id="last-name"><input type="text" class="form-control" placeholder="Last Name"></div>
+    <div id="email"><input type="text" class="form-control" placeholder="Email"></div>
+    <div id="password"><input type="text" class="form-control" placeholder="Password"></div>
+    <div id="confirm-password"><input type="text" class="form-control" placeholder="Confirm Password"></div>
+    <br>
+    <button id="register" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    </div>
+    </form>
+
+
+</div> 
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Films rated by {{ User.username }}</h3>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <th>Films Watched</th>
+            <th>Rating</th>
+        </thead>
+        <tbody>
+            {% for rated_film in rated_films %}
+            <tr id="film-name">
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

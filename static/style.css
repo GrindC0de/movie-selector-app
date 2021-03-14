@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* Base page CSS */
+
+body {
+    text-align: center;
+}
+form {
+    display: inline-block;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.btn {
+    font-weight: 400;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Find a film CSS */
+
+.container {
+    width: 800px;
+    height: 900px;
+    border: 1px solid black;
+    margin: 40px auto 0 auto;
+    position: relative;
+}
+
+.img {
+    height: 60%;
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.h3 {
+    padding-top: 20px;
+    padding-left: 20px;
+    color: black;
+    margin: 0;
+    margin-top: 10px;
+    justify-content: left;
+}
+
+p {
+    margin: 0;
+    margin-top: 30px;
+    color: grey;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.pic {
+    height: 65%;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn {
+    bottom: 10vh;
+    width: 100px;
+    height: 100px;
+    color: white;
+    background-color: crimson;
+    border-radius: 50%;
+    margin: 4px 2px;
+}
+
+#btn1 {
+    background-color: crimson;
+    float: left;
+}
+
+#watch-this {
+    background-color: royalblue;
+    float: right;
+}
+
+
+/* .rating {
+    border: none;
+    float: left;
+    margin: 0px;
+}
+
+.rating > input {
+    display: none;
+}
+
+.rating > label:before {
+    content: '';
+    background: goldenrod;
+    width: 30px;
+    height: 30px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    align-self: center;
+}
+
+.rating > label {
+    border: 2px solid goldenrod;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    float: right;
+    margin: 5px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label hover ~ label {
+    background-color: white !important;
+    cursor: pointer;
+}
+
+.rating > input:checked + label:hover,
+.rathing > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+    background: white !important;
+} */
