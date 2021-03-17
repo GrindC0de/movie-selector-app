@@ -3,7 +3,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from random import randint
 import json
 from sqlalchemy.exc import IntegrityError
-from forms import LoginForm, UserEditForm, UserAddForm
+from forms import LoginForm, UserEditForm, UserAddForm, RateMovie
 from models import db, User, RatedMovies
 import requests
 
@@ -108,11 +108,12 @@ def find_a_film():
 @app.route('/rate-film', methods=["POST"])
 def rate_film():
 
-    # form = RatedMovies()
+    form = RatedMovies()
 
-    # title = requests.get['film-title']
-    # db.add(title)
-    # db.commit()
+    title = request.args['film-title']
+    rating = request.args['rating']
+    db.add(title)
+    db.commit()
 
     return render_template("rate-film.html")
 

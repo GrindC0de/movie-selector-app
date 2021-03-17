@@ -16,33 +16,28 @@ $(document).ready(function () {
             const text = `${data.overview}`
             const id = `${data.id}`
 
-            const imgObj = JSON.stringify(imgPath)
-            const titleObj = JSON.stringify(title)
-            const textObj = JSON.stringify(text)
+            const movie = {
+                title : title,
+                img : imgPath
+            }
 
-            const poster = $("#pic").append(`<img src="${img}"/>`)
-            const resTitle = $("#film-title").append(titleObj)        
-            const resText = $("#plot").append(textObj)
+            console.log(movie)
 
-            console.log(resTitle, resText, poster, id)
-            
-            window.localStorage.setItem
-
+            $("#pic").append(`<img src="${img}"/>`).val()
+            $("#film-title").append(title).val()        
+            $("#plot").append(text).val()
+                
         }
     })
 })
 
 
-function rateMovie() {
+function rateMovie () {
 
-    window.onload = function (data) { 
-        document.querySelector('#watch-this').addEventListener('click', function() {
-            const title = $('#film-title').val(data)
-            const img = $('#pic').val(data) 
-            localStorage.setItem('rate-film', title, img)
-            console.log(rateFilm)
-        });
-    }
+    const resp = document.getElementById('watch-this').addEventListener('click', function () {
+        axios.post('rate-movie')
+        console.log(resp)
+    })
 }
 
 function getNewMovie() {

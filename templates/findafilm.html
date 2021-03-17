@@ -4,19 +4,19 @@
 <title>Find A Film</title>
 
     <div class="container">
-        <div class="pic" id="pic">
+        <form action="/rate-film" id='movieForm' method="POST">
+            <div class="pic" id="pic">
             <img src="">
-        </div>
-        <div class="title" id="title">
-            <h3 id="film-title">Film Name: </h3>
-            <p id="plot">Plot: </p>
-        </div>
-        <form action="/rate-film" method="POST">
-            <button class="btn" id="btn1" type="submit" onClick="getNewMovie()">New Movie</button>
-            <button class="btn" id="watch-this" onClick="rateMovie()">Watch This</button>
-            <input type="hidden" id="rate-film" />
-        </div>
-    
+            </div>
+            <div class="title" id="title">
+                <h3 id="film-title">Film Name: </h3>
+                <p id="plot">Plot: </p>
+            </div>
+        
+                <button class="btn" id="btn1" type="submit" onClick="getNewMovie()">New Movie</button>
+                <button class="btn" id="watch-this" type="submit">Watch This</button>
+            </div>
+        </form>
     </div>
 
 {% endblock %}
