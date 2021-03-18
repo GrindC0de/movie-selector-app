@@ -101,19 +101,21 @@ def edit_profile():
 
 @app.route('/findafilm', methods=["GET", "POST"])
 def find_a_film():
-
     return render_template('findafilm.html')
 
 
 @app.route('/rate-film', methods=["POST"])
 def rate_film():
 
-    form = RatedMovies()
+    movieData = request.form['data']
+    movieJson = json.loads(movieData)
 
-    title = request.args['film-title']
-    rating = request.args['rating']
-    db.add(title)
-    db.commit()
+    # form = RatedMovies()
+
+    # title = request.args['film-title']
+    # rating = request.args['rating']
+    # db.add(title)
+    # db.commit()
 
     return render_template("rate-film.html")
 

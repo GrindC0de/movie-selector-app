@@ -3,7 +3,6 @@ $(document).ready(function () {
     const ranNum = Math.random() * 900
     const apiKey = "?api_key=98003250cab93815401d6d3944d8a675"
 
-
     $.ajax({
         url: filmUrl + ranNum + apiKey,
         content: "application/json",
@@ -17,6 +16,7 @@ $(document).ready(function () {
             const id = `${data.id}`
 
             const movie = {
+                id,
                 title : title,
                 img : imgPath
             }
@@ -26,6 +26,9 @@ $(document).ready(function () {
             $("#pic").append(`<img src="${img}"/>`).val()
             $("#film-title").append(title).val()        
             $("#plot").append(text).val()
+
+            // need to add values to the form so that the form can post these values to the backend
+            $('#movieForm').append(`<input type='hidden' name='data' value='${JSON.stringify(movie)}' />`);
                 
         }
     })
@@ -33,7 +36,6 @@ $(document).ready(function () {
 
 
 function rateMovie () {
-
     const resp = document.getElementById('watch-this').addEventListener('click', function () {
         axios.post('rate-movie')
         console.log(resp)
