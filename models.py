@@ -1,42 +1,49 @@
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
-class User(db.Model):
+def connect_db(app):
+
+    db.app = app
+    db.init_app(app)
+
+class User(db.Model, UserMixin):
 
     __tablename__ = 'users'
 
     id = db.Column(
         db.Integer,
         primary_key=True,
+        autoincrement=True
     )
 
-    email = db.Column(
-        db.Text,
+    username = db.Column(
+        db.String,
         nullable=False,
         unique=True,
     )
 
-    username = db.Column(
-        db.Text,
+    first_name = db.Column(
+        db.String,
+        nullable=False,
+    )
+    
+    last_name = db.Column(
+        db.String,
+        nullable=False,
+    )
+
+    email = db.Column(
+        db.String,
         nullable=False,
         unique=True,
     )
 
     password = db.Column(
-        db.Text,
-        nullable=False,
-    )
-
-    first_name = db.Column(
-        db.Text,
-        nullable=False,
-    )
-    
-    last_name = db.Column(
-        db.Text,
+        db.String,
         nullable=False,
     )
 
@@ -47,7 +54,7 @@ class User(db.Model):
 
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
 
-        user = User(
+        user = Users(
             username=username,
             first_name=first_name,
             last_name=last_name,
@@ -84,9 +91,4 @@ class RatedMovies(db.Model):
         }
 
     def __repr__(self):
-        return f"<RatedMovies {self.id} title={self.title}> rating={self.rating}"
-    
-def connect_db(app):
-
-    db.app = app
-    db.init_app(app)
+        return f"<RatedMovies {self.id}, {self.title}, {self.rating}>"

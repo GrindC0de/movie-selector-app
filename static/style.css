@@ -89,46 +89,68 @@ p {
     float: right;
 }
 
-
-/* .rating {
-    border: none;
-    float: left;
-    margin: 0px;
+.rating {
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    font-size: 50px;
 }
-
-.rating > input {
-    display: none;
-}
-
-.rating > label:before {
-    content: '';
-    background: goldenrod;
-    width: 30px;
-    height: 30px;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    align-self: center;
-}
-
-.rating > label {
-    border: 2px solid goldenrod;
-    display: flex;
-    justify-content: center;
-    height: 40px;
-    width: 40px;
-    float: right;
-    margin: 5px;
-    background-color: black;
-    border-radius: 50%;
-}
-
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label hover ~ label {
-    background-color: white !important;
+  
+.rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     cursor: pointer;
 }
-
-.rating > input:checked + label:hover,
-.rathing > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label {
-    background: white !important;
-} */
+  
+.rating label:last-child {
+    position: static;
+}
+  
+.rating label:nth-child(1) {
+    z-index: 5;
+}
+  
+.rating label:nth-child(2) {
+    z-index: 4;
+}
+  
+.rating label:nth-child(3) {
+    z-index: 3;
+}
+  
+.rating label:nth-child(4) {
+    z-index: 2;
+}
+  
+.rating label:nth-child(5) {
+    z-index: 1;
+}
+  
+.rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+  
+.rating label .icon {
+    float: left;
+    color: transparent;
+}
+  
+.rating label:last-child .icon {
+    color: gray;
+}
+  
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+    color: royalblue;
+}
+  
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: gray;
+    text-shadow: 0 0 5px royalblue;
+}

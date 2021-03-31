@@ -1,23 +1,60 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://unpkg.com/jquery"></script>
+
+  <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Selector</title>
+  <link rel="stylesheet" href="../static/style.css" />
+</head>
 <title>Rate Film</title>
 
 <div class="container">
-    <div class="pic" id="pic">
-        <img src="">
-    </div>
-    <div class="title" id="title">
-        <h3 id="film-title">Film Name: </h3>
-    </div>
-        <div class="title" id="title">
+  <form id='movieForm' name="data" action="/ratedfilms" method="POST">
+    <img src="https://image.tmdb.org/t/p/w500/{{ movieJson['img'] }}" />
+    <h3 id="title">{{ movieJson['title'] }}</h3>  
+       
     <div class="form-group">
-        <h3>How was the film?</h3>
-        <p>Terrible <input type="radio" id="rating" name="rating" value="1" checked />
-        <input type="radio" id="rating" name="rating" value="2" />
-        <input type="radio" id="rating" name="rating" value="3" />
-        <input type="radio" id="rating" name="rating" value="4" />
-        <input type="radio" id="rating" name="rating" value="5" /> Excellent</p>
+      <h3>How was the film?</h3>
+        <div class="rating" id="rating" name="rating">
+          <label>
+            <input type="radio" name="stars" value="1" />
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="2" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="3" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>   
+            </label>
+            <label>
+              <input type="radio" name="stars" value="4" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="stars" value="5" />
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+                <span class="icon">★</span>
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        </form>     
     </div>
 </div>
-
-{% endblock %}

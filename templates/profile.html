@@ -1,16 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<title>Profile</title>
+{% if current_user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="#navbarText">
+    <div class="navbar-nav mr-auto">
+      <a class="nav-item nav-link" href="/findafilm">Find A Film</a>
+      <a class="nav-item nav-link" href="/ratedfilms">Rated Films</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+  </div>
+</nav>
+</div>
+{% for message in get_flashed_messages() %}
+  <p>{{ message }}</p>
+{% endfor %}
 <div class="form-group">
-  <h3>Welcome back, {{ user }}.</h3>
+  <h1>Welcome back, {{ current_user.username }}.</h1>
     <div id="">
-
-      {% if user == user %}
-        <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-      {% endif %}
-
+      <h3>Profile Information</h3>
+      <h4>{{ current_user.username }}</h4>
+      <h4>{{ current_user.first_name }}</h4>
+      <h4>{{ current_user.last_name }}</h4>
+      <h4>{{ current_user.email }}</h4>
+      <br>
+    </div>
+    <div class="form-group">
+      <h4>Ready to watch something? Let's <a href="/findafilm">find a film!</a></h4>
     </div>
 </div>
-
+{% endif %}
 {% endblock %}

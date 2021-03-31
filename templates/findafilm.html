@@ -4,7 +4,7 @@
 <title>Find A Film</title>
 
     <div class="container">
-        <form action="/rate-film" id='movieForm' method="POST">
+        <form action="/rate-film" name="data" id='movieForm' method="POST">
             <div class="pic" id="pic">
             <img src="">
             </div>
@@ -13,8 +13,8 @@
                 <p id="plot">Plot: </p>
             </div>
         
-                <button class="btn" id="btn1" type="submit" onClick="getNewMovie()">New Movie</button>
-                <button class="btn" id="watch-this" type="submit">Watch This</button>
+                <button class="button" id="button1" type="submit" onClick="window.location.reload();">New Movie</button>
+                <button class="button" id="watch-this" type="submit" data-id="title">Watch This</button>
             </div>
         </form>
     </div>

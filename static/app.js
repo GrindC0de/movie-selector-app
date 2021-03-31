@@ -1,6 +1,6 @@
 $(document).ready(function () {
     const filmUrl = "https://api.themoviedb.org/3/movie/550"
-    const ranNum = Math.random() * 900
+    const ranNum = Math.random() * 1100
     const apiKey = "?api_key=98003250cab93815401d6d3944d8a675"
 
 
@@ -17,29 +17,19 @@ $(document).ready(function () {
             const id = `${data.id}`
 
             const movie = {
+                id,
                 title : title,
                 img : imgPath
             }
 
-            console.log(movie)
-
             $("#pic").append(`<img src="${img}"/>`).val()
             $("#film-title").append(title).val()        
             $("#plot").append(text).val()
-                
+
+            console.log(movie)
+
+            $("#movieForm").append(`<input type='hidden' name='data' value='${JSON.stringify(movie)}' />`);
+            
         }
     })
 })
-
-
-function rateMovie () {
-
-    const resp = document.getElementById('watch-this').addEventListener('click', function () {
-        axios.post('rate-movie')
-        console.log(resp)
-    })
-}
-
-function getNewMovie() {
-    window.location.reload();
-}
