@@ -86,12 +86,14 @@ def signup():
         email_obj = User.query.filter_by(email=form.email.data).first()
         if email_obj:
             flash(f"That email has been used.", "warning")
-            return render_template("/", form=email_obj)  
+
         
         new_user = User(username=username, first_name=first_name, last_name=last_name, email=email, password=hashed_password)
 
         db.session.add(new_user)
         db.session.commit()
+        print(new_user)
+        login_user(new_user)
         flash(f'Welcome, {form.username.data}!', 'success')
         return redirect("/profile")
     else:
@@ -104,7 +106,6 @@ def signup():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    
     form = UserEditForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -121,7 +122,7 @@ def profile():
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
 
-    return render_template('profile.html', form=form)
+        return render_template('profile.html', form=form)
 
 
 ##FIND A FILM/RATE A FILM/VIEW WATCHED FILMS
@@ -129,42 +130,57 @@ def profile():
 @app.route('/findafilm', methods=["GET", "POST"])
 @login_required
 def find_a_film():
+    form = RateMovie()
 
-    return render_template('findafilm.html')
+    return render_template('findafilm.html', form=form)
 
 
 @app.route('/rate-film', methods=["POST"])
 @login_required
 def rate_film():
-    
-    movieData = request.form['data']
-    movieJson = json.loads(movieData)
-
+    print("hello")
     form = RateMovie()
+    movieData = request.form.get('data')
+    movieJson = []
 
+    if movieData != None:
+        movieJson = json.loads(movieData)
+        return render_template("rate-film.html", form=form, movieJson=movieJson)
+
+    
+    print("hello2")
     if form.validate_on_submit():
-        title = request.headers.get("title")
+        title = request.form.get('title')
+        print(title)
         rating = request.form.get("rating")
+        print(rating)
         add_movie = RatedMovies(title=title, rating=rating)
         db.session.add(add_movie)
         db.session.commit()
-        print(title, rating)
-        
+                
         return redirect("/ratedfilms")
+    print(form.errors)
+    return render_template("rate-film.html", form=form, movieJson=movieJson)
 
-    print(movieJson)
 
-    return render_template("rate-film.html", movieJson=movieJson)
-
-@app.route('/ratedfilms')
+@app.route('/ratedfilms', methods=['GET'])
 @login_required
 def rated_films():
-    rated_films = RatedMovies.query.order_by('rated_movies').all()
+    rated_films = RatedMovies.query.order_by('rating').all()
     return render_template('ratedfilms.html', rated_films=rated_films)
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+# @app.errorhandler(401)
+# def custom_401(error):
+#     res = Response('<Why access is denied string goes here...>', 401, {'WWW-Authenticate':'Basic realm="Login Required"'})
+#     return render_template('401.html'), 401
+
+@app.errorhandler(400)
+def bad_request(e):
+    return render_template('400.html', e=e), 400
 
 
 if __name__ == '__main__':

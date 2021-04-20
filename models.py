@@ -5,11 +5,6 @@ from flask_login import UserMixin
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
-def connect_db(app):
-
-    db.app = app
-    db.init_app(app)
-
 class User(db.Model, UserMixin):
 
     __tablename__ = 'users'
@@ -79,9 +74,10 @@ class User(db.Model, UserMixin):
 
 class RatedMovies(db.Model):
     __tablename__ = "rated_movies"
-    _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def serialize():
         return {
@@ -92,3 +88,8 @@ class RatedMovies(db.Model):
 
     def __repr__(self):
         return f"<RatedMovies {self.id}, {self.title}, {self.rating}>"
+
+def connect_db(app):
+
+    db.app = app
+    db.init_app(app)

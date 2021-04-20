@@ -1,10 +1,10 @@
 
 
-DROP DATABASE IF EXISTS  movie_select;
+DROP DATABASE IF EXISTS  movie-select;
 
-CREATE DATABASE movie_select;
+CREATE DATABASE movie-select;
 
-\c movie_select
+\c movie-select
 
 CREATE TABLE users
 (
@@ -19,6 +19,7 @@ CREATE TABLE users
 CREATE TABLE rated_movies
 (
   id SERIAL PRIMARY KEY,
-  film_name TEXT NOT NULL,
-  rating DATE
+  user_id SERIAL REFERENCES users(id),
+  title TEXT NOT NULL,
+  rating INTEGER
 );

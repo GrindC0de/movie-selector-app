@@ -16,37 +16,38 @@
 <title>Rate Film</title>
 
 <div class="container">
-  <form id='movieForm' name="data" action="/ratedfilms" method="POST">
+  <form id='movieForm' name="data" action="/rate-film" method="POST">
     <img src="https://image.tmdb.org/t/p/w500/{{ movieJson['img'] }}" />
-    <h3 id="title">{{ movieJson['title'] }}</h3>  
+    <h3 id="title">{{ movieJson['title'] }}</h3>
+      <input type="hidden" name="title" value="{{ movieJson['title'] }}"> 
        
     <div class="form-group">
       <h3>How was the film?</h3>
-        <div class="rating" id="rating" name="rating">
+        <div class="rating" id="rating">
           <label>
-            <input type="radio" name="stars" value="1" />
+            <input type="radio" name="rating" value="1" />
               <span class="icon">★</span>
             </label>
             <label>
-              <input type="radio" name="stars" value="2" />
+              <input type="radio" name="rating" value="2" />
                 <span class="icon">★</span>
                 <span class="icon">★</span>
             </label>
             <label>
-              <input type="radio" name="stars" value="3" />
+              <input type="radio" name="rating" value="3" />
                 <span class="icon">★</span>
                 <span class="icon">★</span>
                 <span class="icon">★</span>   
             </label>
             <label>
-              <input type="radio" name="stars" value="4" />
+              <input type="radio" name="rating" value="4" />
                 <span class="icon">★</span>
                 <span class="icon">★</span>
                 <span class="icon">★</span>
                 <span class="icon">★</span>
             </label>
             <label>
-              <input type="radio" name="stars" value="5" />
+              <input type="radio" name="rating" value="5" />
                 <span class="icon">★</span>
                 <span class="icon">★</span>
                 <span class="icon">★</span>
@@ -55,6 +56,7 @@
             </label>
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+          {{ form.csrf_token }}
         </form>     
     </div>
 </div>

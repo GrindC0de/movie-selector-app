@@ -28,5 +28,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class RateMovie(FlaskForm):
-    movie = StringField('Movie', validators=[DataRequired()])
+    title = StringField('Movie', validators=[DataRequired()])
     rating = SelectField("Rating", choices=[(1, 'Terrible'), (2, 'Not Good'), (3, 'Good'), (4, 'Pretty Good'), (5, 'Excellent')], coerce=int)
