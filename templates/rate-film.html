@@ -15,48 +15,74 @@
 </head>
 <title>Rate Film</title>
 
+{% if current_user.is_authenticated %}
+
+<!-- this checks to make sure the user is authenticated -->
+
+<title>Find A Film</title>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="#navbarText">
+    <div class="navbar-nav mr-auto">
+      <a class="nav-item nav-link" href="/profile">Profile</a>
+      <a class="nav-item nav-link" href="/ratedfilms">Rated Films</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+  </div>
+</nav>
+{% endif %}
+
+<!-- here the selected film info loads and a rating display is set up. Once the user has seen the film, they select a rating and press submit. the info gets sent to the backend database and saved there. -->
+
 <div class="container">
-  <form id='movieForm' name="data" action="/rate-film" method="POST">
-    <img src="https://image.tmdb.org/t/p/w500/{{ movieJson['img'] }}" />
-    <h3 id="title">{{ movieJson['title'] }}</h3>
-      <input type="hidden" name="title" value="{{ movieJson['title'] }}"> 
-       
-    <div class="form-group">
-      <h3>How was the film?</h3>
-        <div class="rating" id="rating">
-          <label>
-            <input type="radio" name="rating" value="1" />
-              <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="2" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="3" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>   
-            </label>
-            <label>
-              <input type="radio" name="rating" value="4" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="5" />
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-                <span class="icon">★</span>
-            </label>
-          </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-          {{ form.csrf_token }}
+  <form id='movieForm' name="data" action="/rate-film" method="POST"></form>
+    <div class="content">
+      <div class="card">
+        <div class="pic">
+          <img src="https://image.tmdb.org/t/p/w500/{{ movieJson['img'] }}" />
+          <h3 id="title">{{ movieJson['title'] }}</h3>
+            <input type="hidden" name="title" value="{{ movieJson['title'] }}">
+        
+        </div>   
+        <div class="form-group">
+          <h3>How was the film?</h3>
+            <div class="rating" id="rating">
+              <label>
+                <input type="radio" name="rating" value="1" />
+                  <span class="icon">★</span>
+                </label>
+                <label>
+                  <input type="radio" name="rating" value="2" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                  <input type="radio" name="rating" value="3" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>   
+                </label>
+                <label>
+                  <input type="radio" name="rating" value="4" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                  <input type="radio" name="rating" value="5" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+              {{ form.csrf_token }}
+            </div>
+          </div> 
         </form>     
     </div>
 </div>

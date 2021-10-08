@@ -9,6 +9,8 @@ class User(db.Model, UserMixin):
 
     __tablename__ = 'users'
 
+    ## this table is the users table. it takes an id, first name, last name, email, and password which gets hashed by Bcrypt.
+
     id = db.Column(
         db.Integer,
         primary_key=True,
@@ -73,6 +75,9 @@ class User(db.Model, UserMixin):
         return False
 
 class RatedMovies(db.Model):
+
+    ## this table is for rated movies adn takes the id, title, rating, and user_id
+
     __tablename__ = "rated_movies"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False)

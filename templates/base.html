@@ -19,6 +19,9 @@
   <h3>Please sign in</h3>
   <div class="form-group">
     <form class="signin" action='/' method='POST'>
+
+      <!-- this is the sign-in form that the user fills out. it gets submitted to the backend if successful and displays an error if unsuccessful -->
+
       <div id="user">{{ form.username }}</div>
       <div id="password">{{ form.password }}</div>
       {% for error in form.errors["password"] %}

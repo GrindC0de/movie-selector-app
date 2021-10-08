@@ -32,10 +32,13 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
+    ## Checks to see if the user has been logged in. If they are, they will not have to sign in
     return User.query.get(int(user_id))
 
 @app.route('/', methods=["GET", "POST"])
 def base():
+    ## this is the homepage. The form checks against the LoginForm for when a user fills it out. If they do something wrong an error o is returned in an object. If the login is successful the /profile page will load
+
     form = LoginForm()
     errors = {}
 
@@ -53,12 +56,13 @@ def base():
 
 @app.route('/login', methods=["POST"])
 def login():
-    
+    ## returns to homepage
     return redirect('/')
 
 @app.route('/logout')
 @login_required
 def logout():
+    ## uses the flask-login to logout the user by checking to see if they are first logged in. Once the user logs out they are redirected to the homepage.
     logout_user()
     flash("You have been logged out.", 'success')
     return redirect("/")
@@ -67,9 +71,11 @@ def logout():
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
+    ## using flask-login, the application checks to see if the user is already logged in, if they are it redirects them to the profile page.
     if current_user.is_authenticated:
         return redirect("/profile")
 
+    ## the form checks info against the form.py. If the user fills out all the correct information and submits the form, they are added to the database. Their password is also Bcrypt-hashed. It also checks against usernames and emails to make sure there are no repeats.
     form = UserAddForm()
 
     if form.validate_on_submit():
@@ -97,6 +103,7 @@ def signup():
         flash(f'Welcome, {form.username.data}!', 'success')
         return redirect("/profile")
     else:
+        ## if there are errors, the error will flash and the page will be reloaded.
         print(form.errors)
 
     
@@ -106,6 +113,9 @@ def signup():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+
+    ## using flask-login, the page checks to see if the user is already logged in with login_required. If they are the page loads the user profile from the database. 
+
     form = UserEditForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -125,11 +135,14 @@ def profile():
         return render_template('profile.html', form=form)
 
 
-##FIND A FILM/RATE A FILM/VIEW WATCHED FILMS
+## FIND A FILM/RATE A FILM/VIEW WATCHED FILMS
 
 @app.route('/findafilm', methods=["GET", "POST"])
 @login_required
 def find_a_film():
+    
+    ## this page loads a random movie with a frontend javascript component. if the user clicks that they want to watch a film, the front end submits the form and they are taken to a rate-film page.
+    
     form = RateMovie()
 
     return render_template('findafilm.html', form=form)
@@ -138,45 +151,53 @@ def find_a_film():
 @app.route('/rate-film', methods=["POST"])
 @login_required
 def rate_film():
-    print("hello")
+
+    ## this page also makes sure the user is logged in. When this page loads, it loads the last randomly selected film that the frontend javascript picked. 
+
     form = RateMovie()
     movieData = request.form.get('data')
     movieJson = []
 
+
+    ## if the movieData is not equal to None, the movieJson will load the movieData and render a json format of movieData.
     if movieData != None:
         movieJson = json.loads(movieData)
         return render_template("rate-film.html", form=form, movieJson=movieJson)
 
-    
-    print("hello2")
+    ## once the user submits a rating on the film, the title, rating, user_id, and add_movie are submitted to the database and saved there so that they can later be displayed in a "rated films" section.
     if form.validate_on_submit():
         title = request.form.get('title')
         print(title)
         rating = request.form.get("rating")
         print(rating)
-        add_movie = RatedMovies(title=title, rating=rating)
+        user_id = current_user.id
+        add_movie = RatedMovies(title=title, rating=rating, user_id=user_id)
         db.session.add(add_movie)
         db.session.commit()
                 
         return redirect("/ratedfilms")
+    
+    ## if there is an error, the form error will flash
     print(form.errors)
     return render_template("rate-film.html", form=form, movieJson=movieJson)
 
 
-@app.route('/ratedfilms', methods=['GET'])
+
+@app.route('/ratedfilms', methods=['GET', 'POST'])
 @login_required
 def rated_films():
-    rated_films = RatedMovies.query.order_by('rating').all()
+    ## Rated Films should simply display the films rated for the user. Once the page is loaded it will reach into the Postgres database and display all of the films by rating. 
+    rated_films = RatedMovies.query.get(title, rating).order_by(rating).all()
     return render_template('ratedfilms.html', rated_films=rated_films)
+
+## Displays a 404 error if the user invokes it
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
-# @app.errorhandler(401)
-# def custom_401(error):
-#     res = Response('<Why access is denied string goes here...>', 401, {'WWW-Authenticate':'Basic realm="Login Required"'})
-#     return render_template('401.html'), 401
+
+## Displays a 400 error if the user invokes it
 
 @app.errorhandler(400)
 def bad_request(e):
